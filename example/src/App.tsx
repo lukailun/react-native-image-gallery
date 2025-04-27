@@ -12,8 +12,6 @@ export default function App() {
     'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
     'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
     'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
   ];
   return <ImageList urls={images} />;
 }
