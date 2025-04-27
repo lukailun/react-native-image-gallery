@@ -11781,6 +11781,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-fast-image@npm:^8.6.3":
+  version: 8.6.3
+  resolution: "react-native-fast-image@npm:8.6.3"
+  peerDependencies:
+    react: ^17 || ^18
+    react-native: ">=0.60.0"
+  checksum: 29289cb6b2eae0983c8922b22e2d9de3be07322bb7991c5def19f95eadefaedb0e308ff0b38cc1d0444e8bd4fe94a7621a99a2d3d9298100bcb60b3144677234
+  languageName: node
+  linkType: hard
+
 "react-native-image-gallery-example@workspace:example":
   version: 0.0.0-use.local
   resolution: "react-native-image-gallery-example@workspace:example"
@@ -11792,7 +11802,11 @@ __metadata:
     react: 18.3.1
     react-dom: 18.2.0
     react-native: 0.76.9
+    react-native-awesome-gallery: ^0.4.3
     react-native-builder-bob: ^0.40.5
+    react-native-fast-image: ^8.6.3
+    react-native-reanimated: 3.16.7
+    react-native-safe-area-context: ^5.4.0
     react-native-web: ~0.18.10
   languageName: unknown
   linkType: soft
@@ -11821,6 +11835,7 @@ __metadata:
     react-native: 0.76.9
     react-native-awesome-gallery: ^0.4.3
     react-native-builder-bob: ^0.40.5
+    react-native-fast-image: ^8.6.3
     react-native-reanimated: ^3.17.5
     react-native-safe-area-context: ^5.4.0
     release-it: ^17.10.0
@@ -11829,6 +11844,7 @@ __metadata:
     react: "*"
     react-native: "*"
     react-native-awesome-gallery: "*"
+    react-native-fast-image: ">=8.0.0"
     react-native-reanimated: ">=3.0.0"
     react-native-safe-area-context: ">=5.0.0"
   languageName: unknown
@@ -11841,6 +11857,29 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 4cdf2b2fb5b131f2015c26d2cb7688b4a0c5f3c8474b1bf0ddfa9eabb0263df440c87262ae8f812a6ecab0d5310df0373bddad4b51f53dabb2ffee01e9ef0f44
+  languageName: node
+  linkType: hard
+
+"react-native-reanimated@npm:3.16.7":
+  version: 3.16.7
+  resolution: "react-native-reanimated@npm:3.16.7"
+  dependencies:
+    "@babel/plugin-transform-arrow-functions": ^7.0.0-0
+    "@babel/plugin-transform-class-properties": ^7.0.0-0
+    "@babel/plugin-transform-classes": ^7.0.0-0
+    "@babel/plugin-transform-nullish-coalescing-operator": ^7.0.0-0
+    "@babel/plugin-transform-optional-chaining": ^7.0.0-0
+    "@babel/plugin-transform-shorthand-properties": ^7.0.0-0
+    "@babel/plugin-transform-template-literals": ^7.0.0-0
+    "@babel/plugin-transform-unicode-regex": ^7.0.0-0
+    "@babel/preset-typescript": ^7.16.7
+    convert-source-map: ^2.0.0
+    invariant: ^2.2.4
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+    react: "*"
+    react-native: "*"
+  checksum: 108095709cd7a3effc5b5d276d94e161b399bd2d06e32140834168a0051545401bb09228071447e5925571da3f86f335d2a82c76751cdae07f66faf50b25c97f
   languageName: node
   linkType: hard
 

@@ -1,20 +1,19 @@
-import { multiply } from 'react-native-image-gallery';
-import { Text, View, StyleSheet } from 'react-native';
-
-const result = multiply(3, 7);
+import { ImageList } from 'react-native-image-gallery';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
-  );
+  const images = [
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+  ];
+  return <ImageList urls={images} />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
