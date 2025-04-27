@@ -49,7 +49,7 @@
     "type": "git",
     "url": "git+https://github.com/lukailun/react-native-image-gallery.git"
   },
-  "author": "Karen <957458041@qq.com> (https://github.com/lukailun)",
+  "author": "Karen (https://github.com/lukailun)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lukailun/react-native-image-gallery/issues"
@@ -77,13 +77,19 @@
     "prettier": "^3.0.3",
     "react": "18.3.1",
     "react-native": "0.76.9",
+    "react-native-awesome-gallery": "^0.4.3",
     "react-native-builder-bob": "^0.40.5",
+    "react-native-reanimated": "^3.17.5",
+    "react-native-safe-area-context": "^5.4.0",
     "release-it": "^17.10.0",
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-awesome-gallery": "*",
+    "react-native-reanimated": ">=3.0.0",
+    "react-native-safe-area-context": ">=5.0.0"
   },
   "workspaces": [
     "example"
