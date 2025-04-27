@@ -55,14 +55,21 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
         { scaleY: withTiming(1, { duration }) },
       ],
     };
+    const imageRatio = imageDimensions.width / imageDimensions.height;
+    const windowRatio = windowWidth / windowHeight;
+    const scaleX =
+      imageRatio > windowRatio
+        ? imageDimensions.width / windowWidth
+        : imageDimensions.height / windowHeight / imageRatio;
+    const scaleY =
+      imageRatio > windowRatio
+        ? imageDimensions.width / windowWidth / imageRatio
+        : imageDimensions.height / windowHeight;
     const initialValues = {
       originX: (selectedImageCenter?.x ?? 0) - windowWidth / 2,
       originY: (selectedImageCenter?.y ?? 0) - windowHeight / 2,
       opacity: 0,
-      transform: [
-        { scaleX: imageDimensions.width / windowWidth },
-        { scaleY: imageDimensions.height / windowHeight },
-      ],
+      transform: [{ scaleX }, { scaleY }],
     };
     return {
       initialValues,
