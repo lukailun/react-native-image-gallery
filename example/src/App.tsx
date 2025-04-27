@@ -1,17 +1,22 @@
+import { PortalProvider } from '@gorhom/portal';
 import { ImageList } from 'react-native-image-gallery';
 
 export default function App() {
   const images = [
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809',
+    'https://api.dicebear.com/7.x/avataaars/png?seed=John',
+    'https://api.dicebear.com/7.x/avataaars/png?seed=Kitty',
+    'https://api.dicebear.com/7.x/avataaars/png?seed=Jane',
+    'https://api.dicebear.com/7.x/avataaars/png?seed=Peter',
+    'https://api.dicebear.com/7.x/avataaars/png?seed=Alice',
+    'https://api.dicebear.com/7.x/avataaars/png?seed=Bob',
+    'https://api.dicebear.com/7.x/avataaars/png?seed=Charlie',
+    'https://api.dicebear.com/7.x/avataaars/png?seed=David',
+    'https://api.dicebear.com/7.x/avataaars/png?seed=Eve',
+    'https://api.dicebear.com/7.x/avataaars/png?seed=Frank',
   ];
-  return <ImageList urls={images} />;
+  return (
+    <PortalProvider>
+      <ImageList urls={images} />
+    </PortalProvider>
+  );
 }
