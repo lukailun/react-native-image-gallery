@@ -20,6 +20,7 @@ interface ImageGalleryProps {
   visible: boolean;
   onClose: () => void;
   onEndReached: () => void;
+  imageDimensions: { width: number; height: number };
   animationDuration?: number;
 }
 
@@ -30,6 +31,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   visible,
   onClose,
   onEndReached,
+  imageDimensions,
   animationDuration,
 }) => {
   const initialIndex = Math.max(images.indexOf(currentImageUrl), 0);
@@ -48,13 +50,19 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
       originX: withTiming(targetValues.targetOriginX, { duration }),
       originY: withTiming(targetValues.targetOriginY, { duration }),
       opacity: withTiming(1, { duration }),
-      transform: [{ scale: withTiming(1, { duration }) }],
+      transform: [
+        { scaleX: withTiming(1, { duration }) },
+        { scaleY: withTiming(1, { duration }) },
+      ],
     };
     const initialValues = {
       originX: (selectedImageCenter?.x ?? 0) - windowWidth / 2,
       originY: (selectedImageCenter?.y ?? 0) - windowHeight / 2,
       opacity: 0,
-      transform: [{ scale: 0 }],
+      transform: [
+        { scaleX: imageDimensions.width / windowWidth },
+        { scaleY: imageDimensions.height / windowHeight },
+      ],
     };
     return {
       initialValues,

@@ -6,6 +6,7 @@ import {
   type StyleProp,
   type ImageStyle,
   View,
+  StatusBar,
 } from 'react-native';
 import { useCallback } from 'react';
 import Animated from 'react-native-reanimated';
@@ -74,6 +75,7 @@ export function ImageList({
 
   return (
     <>
+      <StatusBar hidden={visible} />
       <Animated.FlatList
         keyExtractor={(item) => item}
         numColumns={numColumns}
@@ -94,6 +96,7 @@ export function ImageList({
             selectedImageCenter.current = null;
           }}
           onEndReached={() => {}}
+          imageDimensions={{ width: imageWidth, height: imageHeight }}
           animationDuration={animationDuration}
         />
       )}
