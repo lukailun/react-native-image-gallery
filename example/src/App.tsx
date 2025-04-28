@@ -3,16 +3,26 @@ import { ImageList } from 'react-native-image-gallery';
 
 export default function App() {
   const images = [
-    'https://api.dicebear.com/7.x/avataaars/png?seed=John',
-    'https://api.dicebear.com/7.x/avataaars/png?seed=Kitty',
-    'https://api.dicebear.com/7.x/avataaars/png?seed=Jane',
-    'https://api.dicebear.com/7.x/avataaars/png?seed=Peter',
-    'https://api.dicebear.com/7.x/avataaars/png?seed=Alice',
-    'https://api.dicebear.com/7.x/avataaars/png?seed=Bob',
-    'https://api.dicebear.com/7.x/avataaars/png?seed=Charlie',
-    'https://api.dicebear.com/7.x/avataaars/png?seed=David',
-    'https://api.dicebear.com/7.x/avataaars/png?seed=Eve',
-    'https://api.dicebear.com/7.x/avataaars/png?seed=Frank',
+    'https://picsum.photos/400/400?random=1',
+    'https://picsum.photos/400/400?random=2',
+    'https://picsum.photos/400/400?random=3',
+    'https://picsum.photos/400/400?random=4',
+    'https://picsum.photos/400/400?random=5',
+    'https://picsum.photos/400/400?random=6',
+    'https://picsum.photos/400/400?random=7',
+    'https://picsum.photos/400/400?random=8',
+    'https://picsum.photos/400/400?random=9',
+    'https://picsum.photos/400/400?random=10',
+    'https://picsum.photos/400/400?random=11',
+    'https://picsum.photos/400/400?random=12',
+    'https://picsum.photos/400/400?random=13',
+    'https://picsum.photos/400/400?random=14',
+    'https://picsum.photos/400/400?random=15',
+    'https://picsum.photos/400/400?random=16',
+    'https://picsum.photos/400/400?random=17',
+    'https://picsum.photos/400/400?random=18',
+    'https://picsum.photos/400/400?random=19',
+    'https://picsum.photos/400/400?random=20',
   ];
   return (
     <PortalProvider>
