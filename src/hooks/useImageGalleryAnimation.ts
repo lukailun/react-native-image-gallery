@@ -1,10 +1,7 @@
 import { useWindowDimensions } from 'react-native';
-import {
-  type EntryAnimationsValues,
-  withTiming,
-  type EntryExitAnimationFunction,
-} from 'react-native-reanimated';
+import { Easing, Keyframe } from 'react-native-reanimated';
 import type Point from '../types/Point';
+import type { ReanimatedKeyframe } from 'react-native-reanimated/lib/typescript/layoutReanimation/animationBuilder/Keyframe';
 
 interface UseImageGalleryAnimationProps {
   animationDuration?: number;
@@ -13,8 +10,7 @@ interface UseImageGalleryAnimationProps {
 }
 
 type UseImageGalleryAnimationReturn = {
-  entering: EntryExitAnimationFunction;
-  exiting: EntryExitAnimationFunction;
+  enteringAnimation: ReanimatedKeyframe;
 };
 
 export default function useImageGalleryAnimation({
@@ -35,59 +31,27 @@ export default function useImageGalleryAnimation({
       ? imageDimensions.width / windowWidth / imageRatio
       : imageDimensions.height / windowHeight;
 
-  const entering: EntryExitAnimationFunction = (
-    targetValues: EntryAnimationsValues
-  ) => {
-    'worklet';
-    const animations = {
-      originX: withTiming(targetValues.targetOriginX, { duration }),
-      originY: withTiming(targetValues.targetOriginY, { duration }),
+  const enteringAnimation = new Keyframe({
+    0: {
       transform: [
-        { scaleX: withTiming(1, { duration }) },
-        { scaleY: withTiming(1, { duration }) },
+        { translateX: (selectedImageCenter?.x ?? 0) - windowWidth / 2 },
+        { translateY: (selectedImageCenter?.y ?? 0) - windowHeight / 2 },
+        { scaleX },
+        { scaleY },
       ],
-    };
-    const initialValues = {
-      originX: (selectedImageCenter?.x ?? 0) - windowWidth / 2,
-      originY: (selectedImageCenter?.y ?? 0) - windowHeight / 2,
-      transform: [{ scaleX }, { scaleY }],
-    };
-    // console.log(`Entering: ${(selectedImageCenter?.x ?? 0) - windowWidth / 2} ${(selectedImageCenter?.y ?? 0) - windowHeight / 2}`)
-    return {
-      initialValues,
-      animations,
-    };
-  };
-
-  const exiting: EntryExitAnimationFunction = (
-    targetValues: EntryAnimationsValues
-  ) => {
-    'worklet';
-    const animations = {
-      originX: withTiming((selectedImageCenter?.x ?? 0) - windowWidth / 2, {
-        duration,
-      }),
-      originY: withTiming((selectedImageCenter?.y ?? 0) - windowHeight / 2, {
-        duration,
-      }),
+    },
+    100: {
       transform: [
-        { scaleX: withTiming(scaleX, { duration }) },
-        { scaleY: withTiming(scaleY, { duration }) },
+        { translateX: 0 },
+        { translateY: 0 },
+        { scaleX: 1 },
+        { scaleY: 1 },
       ],
-    };
-    const initialValues = {
-      originX: targetValues.targetOriginX,
-      originY: targetValues.targetOriginY,
-      transform: [{ scaleX: 1 }, { scaleY: 1 }],
-    };
-    return {
-      initialValues,
-      animations,
-    };
-  };
+      easing: Easing.inOut(Easing.ease),
+    },
+  }).duration(duration);
 
   return {
-    entering,
-    exiting,
+    enteringAnimation,
   };
 }

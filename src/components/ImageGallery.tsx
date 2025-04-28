@@ -35,7 +35,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   onIndexChange,
 }) => {
   const initialIndex = Math.max(images.indexOf(currentImageUrl), 0);
-  const { entering, exiting } = useImageGalleryAnimation({
+  const { enteringAnimation } = useImageGalleryAnimation({
     animationDuration,
     imageDimensions,
     selectedImageCenter,
@@ -66,8 +66,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
           return (
             <Animated.View
               style={StyleSheet.absoluteFill}
-              entering={item === currentImageUrl ? entering : undefined}
-              exiting={exiting}
+              entering={
+                item === currentImageUrl ? enteringAnimation : undefined
+              }
             >
               <Animated.Image
                 source={{ uri: item }}
