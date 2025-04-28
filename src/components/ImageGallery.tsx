@@ -68,7 +68,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
               <Animated.View
                 style={StyleSheet.absoluteFill}
                 entering={item === currentImageUrl ? entering : undefined}
-                exiting={item === currentImageUrl ? exiting : undefined}
+                exiting={exiting}
               >
                 <Animated.Image
                   source={{ uri: item }}

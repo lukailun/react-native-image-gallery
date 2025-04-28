@@ -52,6 +52,7 @@ export default function useImageGalleryAnimation({
       originY: (selectedImageCenter?.y ?? 0) - windowHeight / 2,
       transform: [{ scaleX }, { scaleY }],
     };
+    // console.log(`Entering: ${(selectedImageCenter?.x ?? 0) - windowWidth / 2} ${(selectedImageCenter?.y ?? 0) - windowHeight / 2}`)
     return {
       initialValues,
       animations,
@@ -79,6 +80,7 @@ export default function useImageGalleryAnimation({
       originY: targetValues.targetOriginY,
       transform: [{ scaleX: 1 }, { scaleY: 1 }],
     };
+    // console.log(`Exiting: ${(selectedImageCenter?.x ?? 0) - windowWidth / 2} ${(selectedImageCenter?.y ?? 0) - windowHeight / 2}`)
     return {
       initialValues,
       animations,
