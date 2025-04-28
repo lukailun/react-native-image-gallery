@@ -49,6 +49,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   if (!visible || !images.length) {
     return null;
   }
+
   return (
     <Portal>
       <Gallery
@@ -66,9 +67,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
           return (
             <Animated.View
               style={StyleSheet.absoluteFill}
-              entering={
-                item === currentImageUrl ? enteringAnimation : undefined
-              }
+              entering={enteringAnimation}
               exiting={exitingAnimation}
             >
               <Animated.Image
