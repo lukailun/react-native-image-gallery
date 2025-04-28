@@ -13,7 +13,12 @@ import Animated from 'react-native-reanimated';
 import type Point from '../types/Point';
 import ImageGallery from './ImageGallery';
 import useImageGallery from '../hooks/useImageGallery';
-
+import {
+  DEFAULT_GRID_SPACING,
+  DEFAULT_NUM_COLUMNS,
+  DEFAULT_IMAGE_RATIO,
+  DEFAULT_ANIMATION_DURATION,
+} from '../types/Constants';
 interface ImageListProps {
   urls: string[];
   gridSpacing?: number;
@@ -24,10 +29,10 @@ interface ImageListProps {
 
 export function ImageList({
   urls,
-  gridSpacing = 4,
-  numColumns = 3,
-  imageRatio = 1,
-  animationDuration = 500,
+  gridSpacing = DEFAULT_GRID_SPACING,
+  numColumns = DEFAULT_NUM_COLUMNS,
+  imageRatio = DEFAULT_IMAGE_RATIO,
+  animationDuration = DEFAULT_ANIMATION_DURATION,
 }: ImageListProps) {
   const { width: windowWidth } = useWindowDimensions();
   const imageWidth =
@@ -65,6 +70,7 @@ export function ImageList({
             key={item}
             source={{ uri: item }}
             style={imageStyle}
+            resizeMode="cover"
           />
         </Pressable>
       );
