@@ -49,7 +49,6 @@ export default function useImageGalleryAnimation({
       : imageDimensions.height / windowHeight;
 
   const animations = useMemo(() => {
-    // 计算目标图片在网格中的位置
     const targetIndex = Math.round(initialIndex + indexAlpha);
     const row = Math.floor(targetIndex / numColumns);
     const col = targetIndex % numColumns;
@@ -58,9 +57,10 @@ export default function useImageGalleryAnimation({
       x: col * (imageWidth + gridSpacing) + imageWidth / 2,
       y: row * (imageHeight + gridSpacing) + imageHeight / 2,
     };
+    console.log(targetImageCenter);
 
     const enteringAnimation = new Keyframe({
-      0: {
+      from: {
         transform: [
           { translateX: (selectedImageCenter?.x ?? 0) - windowWidth / 2 },
           { translateY: (selectedImageCenter?.y ?? 0) - windowHeight / 2 },
@@ -68,7 +68,7 @@ export default function useImageGalleryAnimation({
           { scaleY },
         ],
       },
-      100: {
+      to: {
         transform: [
           { translateX: 0 },
           { translateY: 0 },
@@ -80,7 +80,7 @@ export default function useImageGalleryAnimation({
     }).duration(duration);
 
     const exitingAnimation = new Keyframe({
-      0: {
+      from: {
         transform: [
           { translateX: 0 },
           { translateY: 0 },
@@ -88,10 +88,10 @@ export default function useImageGalleryAnimation({
           { scaleY: 1 },
         ],
       },
-      100: {
+      to: {
         transform: [
-          { translateX: (targetImageCenter.x ?? 0) - windowWidth / 2 },
-          { translateY: (targetImageCenter.y ?? 0) - windowHeight / 2 },
+          { translateX: (selectedImageCenter?.x ?? 0) - windowWidth / 2 },
+          { translateY: (selectedImageCenter?.y ?? 0) - windowHeight / 2 },
           { scaleX },
           { scaleY },
         ],
