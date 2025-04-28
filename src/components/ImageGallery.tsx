@@ -1,5 +1,5 @@
 import { Portal } from '@gorhom/portal';
-import React, { useState } from 'react';
+import React from 'react';
 import { Pressable, StyleSheet, useWindowDimensions } from 'react-native';
 import Gallery from 'react-native-awesome-gallery';
 import Animated, {
@@ -8,7 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import type Point from '../types/Point';
 
-// import useBackHandler from '@/Hooks/useBackHandler'
+import useBackHandler from '../hooks/useBackHandler';
 
 type ImageURI = string | undefined;
 
@@ -18,10 +18,11 @@ interface ImageGalleryProps {
   selectedImageCenter: Point | null;
   currentImageUrl: string;
   visible: boolean;
-  onClose: () => void;
-  onEndReached: () => void;
+  onClose?: () => void | undefined;
+  onEndReached?: () => void | undefined;
   imageDimensions: { width: number; height: number };
   animationDuration?: number;
+  onIndexChange?: (index: number) => void | undefined;
 }
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({
@@ -33,16 +34,10 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   onEndReached,
   imageDimensions,
   animationDuration,
+  onIndexChange,
 }) => {
   const initialIndex = Math.max(images.indexOf(currentImageUrl), 0);
-  const [currentIndex, setCurrentIndex] = useState(initialIndex);
-  console.log('currentIndex', currentIndex);
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
-  //   const safeAreaInsets = useSafeAreaInsets()
-  //   useBackHandler(() => {
-  //     visible && onClose()
-  //     return true
-  //   })
   const entering = (targetValues: EntryAnimationsValues) => {
     'worklet';
     const duration = animationDuration ?? 750;
@@ -76,7 +71,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
       animations,
     };
   };
-  if (!visible) {
+
+  useBackHandler(() => {
+    visible && onClose?.();
+    return true;
+  });
+
+  if (!visible || !images.length) {
     return null;
   }
   return (
@@ -86,9 +87,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
           data={images}
           initialIndex={initialIndex}
           onIndexChange={(index) => {
-            setCurrentIndex(index);
+            onIndexChange?.(index);
             if (index === images.length - 1) {
-              onEndReached();
+              onEndReached?.();
             }
           }}
           emptySpaceWidth={0}
@@ -100,7 +101,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
                 entering={item === currentImageUrl ? entering : undefined}
               >
                 <Animated.Image
-                  source={{ uri: currentImageUrl }}
+                  source={{ uri: item }}
                   style={styles.image}
                   resizeMode="contain"
                   onLayout={(event) => {
