@@ -11,6 +11,7 @@ interface UseImageGalleryAnimationProps {
 
 type UseImageGalleryAnimationReturn = {
   enteringAnimation: ReanimatedKeyframe;
+  exitingAnimation: ReanimatedKeyframe;
 };
 
 export default function useImageGalleryAnimation({
@@ -51,7 +52,28 @@ export default function useImageGalleryAnimation({
     },
   }).duration(duration);
 
+  const exitingAnimation = new Keyframe({
+    0: {
+      transform: [
+        { translateX: 0 },
+        { translateY: 0 },
+        { scaleX: 1 },
+        { scaleY: 1 },
+      ],
+    },
+    100: {
+      transform: [
+        { translateX: (selectedImageCenter?.x ?? 0) - windowWidth / 2 },
+        { translateY: (selectedImageCenter?.y ?? 0) - windowHeight / 2 },
+        { scaleX },
+        { scaleY },
+      ],
+      easing: Easing.inOut(Easing.ease),
+    },
+  }).duration(duration);
+
   return {
     enteringAnimation,
+    exitingAnimation,
   };
 }
