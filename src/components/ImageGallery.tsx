@@ -78,7 +78,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
         renderItem={({ item, setImageDimensions }) => {
           return (
             <Animated.View
-              style={StyleSheet.absoluteFill}
+              style={StyleSheet.absoluteFillObject}
               entering={enteringAnimation}
               exiting={exitingAnimation}
             >
