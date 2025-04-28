@@ -1,14 +1,12 @@
 import { Portal } from '@gorhom/portal';
 import React from 'react';
-import { Pressable, StyleSheet, useWindowDimensions } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import Gallery from 'react-native-awesome-gallery';
-import Animated, {
-  type EntryAnimationsValues,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import type Point from '../types/Point';
 
 import useBackHandler from '../hooks/useBackHandler';
+import useImageGalleryAnimation from '../hooks/useImageGalleryAnimation';
 
 type ImageURI = string | undefined;
 
@@ -37,40 +35,11 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   onIndexChange,
 }) => {
   const initialIndex = Math.max(images.indexOf(currentImageUrl), 0);
-  const { height: windowHeight, width: windowWidth } = useWindowDimensions();
-  const entering = (targetValues: EntryAnimationsValues) => {
-    'worklet';
-    const duration = animationDuration ?? 750;
-    const animations = {
-      originX: withTiming(targetValues.targetOriginX, { duration }),
-      originY: withTiming(targetValues.targetOriginY, { duration }),
-      opacity: withTiming(1, { duration }),
-      transform: [
-        { scaleX: withTiming(1, { duration }) },
-        { scaleY: withTiming(1, { duration }) },
-      ],
-    };
-    const imageRatio = imageDimensions.width / imageDimensions.height;
-    const windowRatio = windowWidth / windowHeight;
-    const scaleX =
-      imageRatio > windowRatio
-        ? imageDimensions.width / windowWidth
-        : imageDimensions.height / windowHeight / imageRatio;
-    const scaleY =
-      imageRatio > windowRatio
-        ? imageDimensions.width / windowWidth / imageRatio
-        : imageDimensions.height / windowHeight;
-    const initialValues = {
-      originX: (selectedImageCenter?.x ?? 0) - windowWidth / 2,
-      originY: (selectedImageCenter?.y ?? 0) - windowHeight / 2,
-      opacity: 0,
-      transform: [{ scaleX }, { scaleY }],
-    };
-    return {
-      initialValues,
-      animations,
-    };
-  };
+  const { entering } = useImageGalleryAnimation({
+    animationDuration,
+    imageDimensions,
+    selectedImageCenter,
+  });
 
   useBackHandler(() => {
     visible && onClose?.();

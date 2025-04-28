@@ -18,7 +18,9 @@ type UseImageGalleryReturn = {
   dismiss: () => void;
 };
 
-const useImageGallery = (initialImageUrl?: string): UseImageGalleryReturn => {
+export default function useImageGallery(
+  initialImageUrl?: string
+): UseImageGalleryReturn {
   const [imageUrl, setImageUrl] = useState(initialImageUrl);
   const [visible, setVisible] = useState(initialImageUrl !== undefined);
 
@@ -36,6 +38,4 @@ const useImageGallery = (initialImageUrl?: string): UseImageGalleryReturn => {
     setImageUrl,
     dismiss,
   };
-};
-
-export default useImageGallery;
+}

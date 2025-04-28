@@ -28,7 +28,6 @@ export function ImageList({
   numColumns = 3,
   imageRatio = 1,
   animationDuration = 750,
-  //   ...flatListProps
 }: ImageListProps) {
   const { width: windowWidth } = useWindowDimensions();
   const imageWidth =
@@ -75,7 +74,7 @@ export function ImageList({
 
   return (
     <>
-      <StatusBar hidden={visible} />
+      <StatusBar hidden={visible} animated />
       <Animated.FlatList
         keyExtractor={(item) => item}
         numColumns={numColumns}
