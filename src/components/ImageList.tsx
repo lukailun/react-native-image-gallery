@@ -27,7 +27,7 @@ export function ImageList({
   gridSpacing = 4,
   numColumns = 3,
   imageRatio = 1,
-  animationDuration = 750,
+  animationDuration = 500,
 }: ImageListProps) {
   const { width: windowWidth } = useWindowDimensions();
   const imageWidth =
@@ -83,22 +83,20 @@ export function ImageList({
         data={urls}
         renderItem={renderItem}
       />
-      {imageUrl && (
-        <ImageGallery
-          images={urls}
-          totalCount={urls.length}
-          selectedImageCenter={selectedImageCenter.current}
-          currentImageUrl={imageUrl}
-          visible={visible}
-          onClose={() => {
-            dismiss();
-            selectedImageCenter.current = null;
-          }}
-          onEndReached={() => {}}
-          imageDimensions={{ width: imageWidth, height: imageHeight }}
-          animationDuration={animationDuration}
-        />
-      )}
+      <ImageGallery
+        images={urls}
+        totalCount={urls.length}
+        selectedImageCenter={selectedImageCenter.current}
+        currentImageUrl={imageUrl}
+        visible={visible}
+        onClose={() => {
+          dismiss();
+          selectedImageCenter.current = null;
+        }}
+        onEndReached={() => {}}
+        imageDimensions={{ width: imageWidth, height: imageHeight }}
+        animationDuration={animationDuration}
+      />
     </>
   );
 }

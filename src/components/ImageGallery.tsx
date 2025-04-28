@@ -1,6 +1,6 @@
 import { Portal } from '@gorhom/portal';
 import React from 'react';
-import { Pressable, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Gallery from 'react-native-awesome-gallery';
 import Animated from 'react-native-reanimated';
 import type Point from '../types/Point';
@@ -14,7 +14,7 @@ interface ImageGalleryProps {
   images: ImageURI[];
   totalCount: number;
   selectedImageCenter: Point | null;
-  currentImageUrl: string;
+  currentImageUrl: string | undefined;
   visible: boolean;
   onClose?: () => void | undefined;
   onEndReached?: () => void | undefined;
@@ -51,42 +51,40 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   }
   return (
     <Portal>
-      <Pressable style={styles.container} onPress={onClose}>
-        <Gallery
-          data={images}
-          initialIndex={initialIndex}
-          onIndexChange={(index) => {
-            onIndexChange?.(index);
-            if (index === images.length - 1) {
-              onEndReached?.();
-            }
-          }}
-          emptySpaceWidth={0}
-          doubleTapInterval={1000}
-          renderItem={({ item, setImageDimensions }) => {
-            return (
-              <Animated.View
-                style={StyleSheet.absoluteFill}
-                entering={item === currentImageUrl ? entering : undefined}
-                exiting={exiting}
-              >
-                <Animated.Image
-                  source={{ uri: item }}
-                  style={styles.image}
-                  resizeMode="contain"
-                  onLayout={(event) => {
-                    const { width, height } = event.nativeEvent.layout;
-                    setImageDimensions({ width, height });
-                  }}
-                />
-              </Animated.View>
-            );
-          }}
-          onTap={onClose}
-          onSwipeToClose={onClose}
-          style={styles.gallery}
-        />
-      </Pressable>
+      <Gallery
+        data={images}
+        initialIndex={initialIndex}
+        onIndexChange={(index) => {
+          onIndexChange?.(index);
+          if (index === images.length - 1) {
+            onEndReached?.();
+          }
+        }}
+        emptySpaceWidth={0}
+        doubleTapInterval={1000}
+        renderItem={({ item, setImageDimensions }) => {
+          return (
+            <Animated.View
+              style={StyleSheet.absoluteFill}
+              entering={item === currentImageUrl ? entering : undefined}
+              exiting={exiting}
+            >
+              <Animated.Image
+                source={{ uri: item }}
+                style={styles.image}
+                resizeMode="contain"
+                onLayout={(event) => {
+                  const { width, height } = event.nativeEvent.layout;
+                  setImageDimensions({ width, height });
+                }}
+              />
+            </Animated.View>
+          );
+        }}
+        onTap={onClose}
+        onSwipeToClose={onClose}
+        style={styles.gallery}
+      />
     </Portal>
   );
 };
