@@ -87,8 +87,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
                 style={styles.image}
                 resizeMode="contain"
                 onLayout={(event) => {
-                  const { width, height } = event.nativeEvent.layout;
-                  setImageDimensions({ width, height });
+                  setImageDimensions(event.nativeEvent.layout);
                 }}
               />
             </Animated.View>
