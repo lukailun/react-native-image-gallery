@@ -1,7 +1,7 @@
 import { Portal } from '@gorhom/portal';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
-import Gallery from 'react-native-awesome-gallery';
+import Gallery, { type GalleryRef } from 'react-native-awesome-gallery';
 import Animated from 'react-native-reanimated';
 import type Point from '../types/Point';
 
@@ -39,6 +39,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   numColumns = DEFAULT_NUM_COLUMNS,
   onIndexChange,
 }) => {
+  const galleryRef = useRef<GalleryRef>(null);
   const initialIndex = Math.max(images.indexOf(currentImageUrl), 0);
   const [indexAlpha, setIndexAlpha] = useState(0);
 
@@ -64,6 +65,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   return (
     <Portal>
       <Gallery
+        ref={galleryRef}
         data={images}
         initialIndex={initialIndex}
         onIndexChange={(index) => {
@@ -86,15 +88,17 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
                 source={{ uri: item }}
                 style={styles.image}
                 resizeMode="contain"
-                onLayout={(event) => {
-                  setImageDimensions(event.nativeEvent.layout);
-                }}
+                onLayout={(event) =>
+                  setImageDimensions(event.nativeEvent.layout)
+                }
               />
             </Animated.View>
           );
         }}
-        onTap={onClose}
-        onSwipeToClose={onClose}
+        onTap={() => {
+          galleryRef.current?.reset(false);
+          onClose?.();
+        }}
         style={styles.gallery}
       />
     </Portal>
@@ -117,6 +121,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    backgroundColor: 'black',
   },
   image: {
     width: '100%',
